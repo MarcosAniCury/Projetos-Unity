@@ -5,18 +5,6 @@ public class ZombiController : MonoBehaviour
     public GameObject player;
     public float zombiSpeed = 5;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
         float distanceBetweenZombiAndPlayer = Vector3.Distance(
