@@ -17,11 +17,11 @@ public class PlayerController : MonoBehaviour
 
     const int RAY_LENGTH = 100;
     const string INPUT_MOUSE_LEFT = "Fire1";
+    const int GAME_RESUME = 1;
 
     void Start() 
     {
-        //Game unpause
-        Time.timeScale = 1;
+        Time.timeScale = GAME_RESUME;
     }
     
     void Update()

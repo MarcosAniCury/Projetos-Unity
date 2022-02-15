@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    //public vars
     public GameObject player;
+
+    //private vars
     Vector3 distanceBetweenPlayerAndCamera;
 
     void Start() {

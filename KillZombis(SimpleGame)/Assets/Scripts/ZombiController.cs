@@ -8,6 +8,7 @@ public class ZombiController : MonoBehaviour
 
     //CONSTs
     const string ANIMATOR_ATTACKING = "Attacking";
+    const int GAME_PAUSE = 0;
 
     void FixedUpdate()
     {
@@ -35,8 +36,7 @@ public class ZombiController : MonoBehaviour
 
     void AttackPlayer() 
     {
-        //Game pause
-        Time.timeScale = 0;
+        Time.timeScale = GAME_PAUSE;
         player.GetComponent<PlayerController>().GameOverCanvas.SetActive(true);
         player.GetComponent<PlayerController>().gameOver = true;
     }

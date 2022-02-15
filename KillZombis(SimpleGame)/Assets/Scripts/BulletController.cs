@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-
+    //public vars
     public float bulletSpeed = 20;
 
+    //CONSTs
     const string TAG_ENEMY = "Enemy";
 
     void FixedUpdate() 
