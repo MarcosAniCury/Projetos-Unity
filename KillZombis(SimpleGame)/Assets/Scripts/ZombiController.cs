@@ -26,9 +26,18 @@ public class ZombiController : MonoBehaviour
                 GetComponent<Rigidbody>().position + 
                 ( direction.normalized * zombiSpeed * Time.deltaTime )
             );
+
             GetComponent<Animator>().SetBool(ANIMATOR_ATTACKING, false);
         } else {
             GetComponent<Animator>().SetBool(ANIMATOR_ATTACKING, true);
         }
+    }
+
+    void AttackPlayer() 
+    {
+        //Game pause
+        Time.timeScale = 0;
+        player.GetComponent<PlayerController>().GameOverCanvas.SetActive(true);
+        player.GetComponent<PlayerController>().gameOver = true;
     }
 }

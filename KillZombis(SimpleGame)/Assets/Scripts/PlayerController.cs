@@ -1,14 +1,28 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    //public vars
     public float movementTimePerSecond = 10;
-    Vector3 direction;
     public LayerMask florMask;
+    public GameObject GameOverCanvas;
+    public bool gameOver = false;
 
+    //private vars
+    Vector3 direction;
+
+    //CONSTs
     const string ANIMATOR_RUNNING = "Running";
 
     const int RAY_LENGTH = 100;
+    const string INPUT_MOUSE_LEFT = "Fire1";
+
+    void Start() 
+    {
+        //Game unpause
+        Time.timeScale = 1;
+    }
     
     void Update()
     {
@@ -27,6 +41,10 @@ public class PlayerController : MonoBehaviour
         }
 
         GetComponent<Animator>().SetBool(ANIMATOR_RUNNING, running);
+
+        if (gameOver && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
+            SceneManager.LoadScene("MainScene");
+        }
     }
 
     void FixedUpdate() 
