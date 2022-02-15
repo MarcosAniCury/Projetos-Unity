@@ -4,6 +4,11 @@ public class PlayerController : MonoBehaviour
 {
     public float movementTimePerSecond = 10;
     Vector3 direction;
+    public LayerMask florMask;
+
+    const string ANIMATOR_RUNNING = "Running";
+
+    const int RAY_LENGTH = 100;
     
     void Update()
     {
@@ -21,7 +26,7 @@ public class PlayerController : MonoBehaviour
             running = true;
         }
 
-        GetComponent<Animator>().SetBool("Running", running);
+        GetComponent<Animator>().SetBool(ANIMATOR_RUNNING, running);
     }
 
     void FixedUpdate() 
@@ -32,5 +37,19 @@ public class PlayerController : MonoBehaviour
                 direction * Time.deltaTime * movementTimePerSecond
                 )
             );
+
+        Ray rayCamera = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit rayCameraImpact;
+
+        if (Physics.Raycast(rayCamera,out rayCameraImpact, RAY_LENGTH, florMask)) {
+            Vector3 playerLookPosition = rayCameraImpact.point - transform.position;
+
+            playerLookPosition.y = transform.position.y;
+
+            Quaternion playerLookRotation = Quaternion.LookRotation(playerLookPosition);
+
+            GetComponent<Rigidbody>().MoveRotation(playerLookRotation);
+        }
     }
 }
