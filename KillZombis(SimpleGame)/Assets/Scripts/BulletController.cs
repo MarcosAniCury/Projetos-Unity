@@ -5,7 +5,10 @@ public class BulletController : MonoBehaviour
 
     public float bulletSpeed = 20;
 
-    void FixedUpdate() {
+    const string TAG_ENEMY = "Enemy";
+
+    void FixedUpdate() 
+    {
         GetComponent<Rigidbody>().MovePosition(
             GetComponent<Rigidbody>().position + (
                 transform.forward *
@@ -13,5 +16,14 @@ public class BulletController : MonoBehaviour
                 Time.deltaTime
             )
         );
+    }
+
+    void OnTriggerEnter(Collider colliderObject) 
+    {
+        if (colliderObject.tag == TAG_ENEMY) {
+            Destroy(colliderObject.gameObject);
+        }
+
+        Destroy(gameObject);
     }
 }
