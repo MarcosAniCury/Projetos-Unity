@@ -643,7 +643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b7a83c85c00fec47bdc1efccd55f63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   zombiSpeed: 3
 --- !u!54 &3461041793517904527
 Rigidbody:
@@ -1337,7 +1336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4729257623563424
 Transform:
   m_ObjectHideFlags: 0

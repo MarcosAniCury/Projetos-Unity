@@ -2,13 +2,23 @@ using UnityEngine;
 
 public class ZombiController : MonoBehaviour
 {
-    //Publics vars
-    public GameObject player;
+    //Public vars
     public float zombiSpeed = 5;
+
+    //Private vars
+    GameObject player;
 
     //CONSTs
     const string ANIMATOR_ATTACKING = "Attacking";
     const int GAME_PAUSE = 0;
+    const string TAG_PLAYER = "Player";
+
+    void Start() 
+    {
+        player = GameObject.FindWithTag(TAG_PLAYER);
+        int generateTypeZombie = Random.Range(1, 28);
+        transform.GetChild(generateTypeZombie).gameObject.SetActive(true);
+    }
 
     void FixedUpdate()
     {
