@@ -3,8 +3,8 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     //public vars
-    public GameObject bullet;
-    public GameObject barrelGun;
+    public GameObject Bullet;
+    public GameObject BarrelGun;
 
     //CONSTs
     const string INPUT_MOUSE_LEFT = "Fire1";
@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
-            Instantiate(bullet, barrelGun.transform.position, barrelGun.transform.rotation);
+            Instantiate(Bullet, BarrelGun.transform.position, BarrelGun.transform.rotation);
         }
     }
 }

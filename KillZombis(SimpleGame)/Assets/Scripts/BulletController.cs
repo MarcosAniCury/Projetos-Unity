@@ -3,17 +3,25 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     //public vars
-    public float bulletSpeed = 20;
+    public float BulletSpeed = 20;
 
     //CONSTs
     const string TAG_ENEMY = "Enemy";
 
+    //Components
+    Rigidbody bulletRigidbody;
+
+    void Start() 
+    {
+        bulletRigidbody = GetComponent<Rigidbody>();
+    }
+
     void FixedUpdate() 
     {
-        GetComponent<Rigidbody>().MovePosition(
-            GetComponent<Rigidbody>().position + (
+        bulletRigidbody.MovePosition(
+            bulletRigidbody.position + (
                 transform.forward *
-                bulletSpeed *
+                BulletSpeed *
                 Time.deltaTime
             )
         );

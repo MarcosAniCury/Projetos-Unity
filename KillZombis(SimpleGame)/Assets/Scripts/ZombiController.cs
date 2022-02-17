@@ -3,10 +3,10 @@ using UnityEngine;
 public class ZombiController : MonoBehaviour
 {
     //Public vars
-    public float zombiSpeed = 5;
+    public float ZombiSpeed = 5;
 
     //Private vars
-    GameObject player;
+    private GameObject player;
 
     //CONSTs
     const string ANIMATOR_ATTACKING = "Attacking";
@@ -35,7 +35,7 @@ public class ZombiController : MonoBehaviour
             //Zombi move
             GetComponent<Rigidbody>().MovePosition(
                 GetComponent<Rigidbody>().position + 
-                ( direction.normalized * zombiSpeed * Time.deltaTime )
+                ( direction.normalized * ZombiSpeed * Time.deltaTime )
             );
 
             GetComponent<Animator>().SetBool(ANIMATOR_ATTACKING, false);
@@ -48,6 +48,6 @@ public class ZombiController : MonoBehaviour
     {
         Time.timeScale = GAME_PAUSE;
         player.GetComponent<PlayerController>().GameOverCanvas.SetActive(true);
-        player.GetComponent<PlayerController>().gameOver = true;
+        player.GetComponent<PlayerController>().GameOver = true;
     }
 }

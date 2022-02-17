@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     //public vars
-    public float movementTimePerSecond = 10;
-    public LayerMask florMask;
+    public float MovementTimePerSecond = 10;
+    public LayerMask FlorMask;
     public GameObject GameOverCanvas;
-    public bool gameOver = false;
+    public bool GameOver = false;
 
     //private vars
-    Vector3 direction;
+    private Vector3 direction;
 
     //CONSTs
     const string ANIMATOR_RUNNING = "Running";
@@ -19,9 +19,13 @@ public class PlayerController : MonoBehaviour
     const string INPUT_MOUSE_LEFT = "Fire1";
     const int GAME_RESUME = 1;
 
+    //Components
+    Rigidbody playerRigidbody;
+
     void Start() 
     {
         Time.timeScale = GAME_RESUME;
+        playerRigidbody = GetComponent<Rigidbody>();
     }
     
     void Update()
@@ -35,14 +39,11 @@ public class PlayerController : MonoBehaviour
         //Way to move the object "personagens" using the object
         //transform.Translate(direction * Time.deltaTime * movementTimePerSecond);
 
-        bool running = false;
-        if (direction != Vector3.zero) {
-            running = true;
-        }
+        bool running = direction != Vector3.zero;
 
         GetComponent<Animator>().SetBool(ANIMATOR_RUNNING, running);
 
-        if (gameOver && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
+        if (GameOver && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
             SceneManager.LoadScene("MainScene");
         }
     }
@@ -50,9 +51,9 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate() 
     {
         //Way to move the object "personagens" using physics
-        GetComponent<Rigidbody>().MovePosition(
-            GetComponent<Rigidbody>().position + (
-                direction * Time.deltaTime * movementTimePerSecond
+        playerRigidbody.MovePosition(
+            playerRigidbody.position + (
+                direction * Time.deltaTime * MovementTimePerSecond
                 )
             );
 
@@ -60,14 +61,14 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit rayCameraImpact;
 
-        if (Physics.Raycast(rayCamera,out rayCameraImpact, RAY_LENGTH, florMask)) {
+        if (Physics.Raycast(rayCamera,out rayCameraImpact, RAY_LENGTH, FlorMask)) {
             Vector3 playerLookPosition = rayCameraImpact.point - transform.position;
 
             playerLookPosition.y = transform.position.y;
 
             Quaternion playerLookRotation = Quaternion.LookRotation(playerLookPosition);
 
-            GetComponent<Rigidbody>().MoveRotation(playerLookRotation);
+            playerRigidbody.MoveRotation(playerLookRotation);
         }
     }
 }

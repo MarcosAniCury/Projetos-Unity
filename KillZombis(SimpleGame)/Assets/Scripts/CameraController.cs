@@ -3,16 +3,16 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     //public vars
-    public GameObject player;
+    public GameObject Player;
 
     //private vars
-    Vector3 distanceBetweenPlayerAndCamera;
+    private Vector3 distanceBetweenPlayerAndCamera;
 
     void Start() {
-        distanceBetweenPlayerAndCamera = transform.position - player.transform.position;
+        distanceBetweenPlayerAndCamera = transform.position - Player.transform.position;
     }
 
     void Update() {
-        transform.position = player.transform.position + distanceBetweenPlayerAndCamera;
+        transform.position = Player.transform.position + distanceBetweenPlayerAndCamera;
     }
 }
