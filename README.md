@@ -10,6 +10,10 @@
 
   - Marcos Ani Cury Vinagre Silva
 
-### Link
+### Links
 
-  [Clique aqui para ir para o código do jogo]()
+  [Código](https://github.com/MarcosAniCury/Projetos-Unity/tree/main/KillZombis(SimpleGame))
+  
+  [Jogo](https://miko98.itch.io/killzombies)
+  
+  Senha de acesso pro jogo: "casalcode"
