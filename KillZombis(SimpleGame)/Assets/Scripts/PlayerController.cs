@@ -3,13 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    //public vars
+    //Public vars
     public float MovementTimePerSecond = 10;
     public LayerMask FlorMask;
-    public GameObject GameOverCanvas;
-    public bool GameOver = false;
-
-    //private vars
+    public GameObject GameOverComponent;
+    public int Life = 100;
+    public UIController UIController;
+    
+    //Private vars
     private Vector3 direction;
 
     //CONSTs
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     const int RAY_LENGTH = 100;
     const string INPUT_MOUSE_LEFT = "Fire1";
     const int GAME_RESUME = 1;
+    const int GAME_PAUSE = 0;
 
     //Components
     Rigidbody playerRigidbody;
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
         GetComponent<Animator>().SetBool(ANIMATOR_RUNNING, running);
 
-        if (GameOver && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
+        if (Life <= 0 && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
             SceneManager.LoadScene("MainScene");
         }
     }
@@ -69,6 +71,16 @@ public class PlayerController : MonoBehaviour
             Quaternion playerLookRotation = Quaternion.LookRotation(playerLookPosition);
 
             playerRigidbody.MoveRotation(playerLookRotation);
+        }
+    }
+
+    public void takeDamage(int damageTaked) 
+    {
+        Life -= damageTaked;
+        UIController.updatedLivePlayerSlider();
+        if (Life <= 0) {
+            Time.timeScale = GAME_PAUSE;
+            GameOverComponent.SetActive(true);
         }
     }
 }
