@@ -12,7 +12,7 @@
 
 ### Links
 
-  [Código](https://github.com/MarcosAniCury/Projetos-Unity/tree/main/KillZombis(SimpleGame))
+  [Código](https://github.com/MarcosAniCury/Projetos-Unity/tree/main/KillZombies(SimpleGame))
   
   [Jogo](https://miko98.itch.io/killzombies)
   

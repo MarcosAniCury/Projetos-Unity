@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ZombiController : MonoBehaviour
+public class ZombieController : MonoBehaviour
 {
     //Public vars
     public float ZombiSpeed = 5;
