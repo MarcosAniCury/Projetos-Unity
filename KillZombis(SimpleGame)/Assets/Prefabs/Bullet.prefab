@@ -109,7 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fc1f90e1fb08e4b8534f7939e8f7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 20
+  BulletSpeed: 20
+  ZombieDieSound: {fileID: 8300000, guid: f724f8c41d804fd46a3b68d6c3be7074, type: 3}
 --- !u!54 &2651947809065248992
 Rigidbody:
   m_ObjectHideFlags: 0

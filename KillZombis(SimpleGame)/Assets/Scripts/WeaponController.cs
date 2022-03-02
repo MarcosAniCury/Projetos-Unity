@@ -5,6 +5,7 @@ public class WeaponController : MonoBehaviour
     //public vars
     public GameObject Bullet;
     public GameObject BarrelGun;
+    public AudioClip ShotSound;
 
     //CONSTs
     const string INPUT_MOUSE_LEFT = "Fire1";
@@ -14,6 +15,7 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
             Instantiate(Bullet, BarrelGun.transform.position, BarrelGun.transform.rotation);
+            SoundController.instance.PlayOneShot(ShotSound);
         }
     }
 }

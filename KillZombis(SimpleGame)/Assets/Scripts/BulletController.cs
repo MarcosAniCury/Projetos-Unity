@@ -4,6 +4,7 @@ public class BulletController : MonoBehaviour
 {
     //public vars
     public float BulletSpeed = 20;
+    public AudioClip ZombieDieSound;
 
     //CONSTs
     const string TAG_ENEMY = "Enemy";
@@ -31,6 +32,7 @@ public class BulletController : MonoBehaviour
     {
         if (colliderObject.tag == TAG_ENEMY) {
             Destroy(colliderObject.gameObject);
+            SoundController.instance.PlayOneShot(ZombieDieSound);
         }
 
         Destroy(gameObject);

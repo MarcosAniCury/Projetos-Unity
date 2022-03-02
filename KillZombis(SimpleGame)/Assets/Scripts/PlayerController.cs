@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject GameOverComponent;
     public int Life = 100;
     public UIController UIController;
+    public AudioClip DamageSound;
     
     //Private vars
     private Vector3 direction;
@@ -78,6 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         Life -= damageTaked;
         UIController.updatedLivePlayerSlider();
+        SoundController.instance.PlayOneShot(DamageSound);
         if (Life <= 0) {
             Time.timeScale = GAME_PAUSE;
             GameOverComponent.SetActive(true);
