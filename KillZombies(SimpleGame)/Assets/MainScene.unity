@@ -6678,6 +6678,18 @@ MonoBehaviour:
   Bullet: {fileID: 8830958364831459854, guid: ee64a3b6c694682489f702fec27f30ab, type: 3}
   BarrelGun: {fileID: 1357809671}
   ShotSound: {fileID: 8300000, guid: ac3ba57ac650e8b4fa15986c82f1ce27, type: 3}
+--- !u!114 &1116728036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116728029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c5468167c188a46a00decc33b825de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1119455652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4656246329960846, guid: bf4e53320739441f58d231c2ee884b66, type: 3}

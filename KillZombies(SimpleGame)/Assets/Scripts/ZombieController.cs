@@ -15,10 +15,8 @@ public class ZombieController : MonoBehaviour
     const string TAG_PLAYER = "Player";
 
     //Components
-
-    Rigidbody zombiRigidbody;
-
     PlayerController playerController;
+    MovementCharacter myMovement;
 
 
     void Start() 
@@ -26,8 +24,8 @@ public class ZombieController : MonoBehaviour
         player = GameObject.FindWithTag(TAG_PLAYER);
         int generateTypeZombie = Random.Range(1, 28);
         transform.GetChild(generateTypeZombie).gameObject.SetActive(true);
-        zombiRigidbody = GetComponent<Rigidbody>();
-        playerController = player.GetComponent<PlayerController>();  
+        playerController = player.GetComponent<PlayerController>(); 
+        myMovement = GetComponent<MovementCharacter>(); 
     }
 
     void FixedUpdate()
@@ -38,18 +36,12 @@ public class ZombieController : MonoBehaviour
 
         //Zombi Rotation
         Vector3 direction = player.transform.position - transform.position;
-        Quaternion zombiDirection = Quaternion.LookRotation(direction);
-        zombiRigidbody.MoveRotation(zombiDirection);
+        myMovement.Rotation(direction);
 
         bool attacking = true;
 
         if (distanceBetweenZombiAndPlayer > 2.5) {
-            //Zombi move
-            zombiRigidbody.MovePosition(
-                zombiRigidbody.position + 
-                ( direction.normalized * ZombiSpeed * Time.deltaTime )
-            );
-
+            myMovement.Movement(direction.normalized, ZombiSpeed);
             attacking = false;
         } 
         

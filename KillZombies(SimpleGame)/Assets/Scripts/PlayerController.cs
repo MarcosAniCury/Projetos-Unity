@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     //Public vars
-    public float MovementTimePerSecond = 10;
+    public float PlayerSpeed = 10;
     public LayerMask FlorMask;
     public GameObject GameOverComponent;
     public int Life = 100;
@@ -23,12 +23,12 @@ public class PlayerController : MonoBehaviour
     const int GAME_PAUSE = 0;
 
     //Components
-    Rigidbody playerRigidbody;
+    MovementCharacter myMovement;
 
     void Start() 
     {
         Time.timeScale = GAME_RESUME;
-        playerRigidbody = GetComponent<Rigidbody>();
+        myMovement = GetComponent<MovementCharacter>();
     }
     
     void Update()
@@ -38,9 +38,6 @@ public class PlayerController : MonoBehaviour
         float axisZ = Input.GetAxis("Vertical");
 
         direction = new Vector3(axisX, 0, axisZ);
-
-        //Way to move the object "personagens" using the object
-        //transform.Translate(direction * Time.deltaTime * movementTimePerSecond);
 
         bool running = direction != Vector3.zero;
 
@@ -53,12 +50,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() 
     {
-        //Way to move the object "personagens" using physics
-        playerRigidbody.MovePosition(
-            playerRigidbody.position + (
-                direction * Time.deltaTime * MovementTimePerSecond
-                )
-            );
+        myMovement.Movement(direction, PlayerSpeed);
 
         Ray rayCamera = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -66,12 +58,9 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(rayCamera,out rayCameraImpact, RAY_LENGTH, FlorMask)) {
             Vector3 playerLookPosition = rayCameraImpact.point - transform.position;
-
             playerLookPosition.y = transform.position.y;
 
-            Quaternion playerLookRotation = Quaternion.LookRotation(playerLookPosition);
-
-            playerRigidbody.MoveRotation(playerLookRotation);
+            myMovement.Rotation(playerLookPosition);
         }
     }
 
