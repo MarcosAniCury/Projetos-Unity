@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDeadly
 {
     //Public vars
     public LayerMask FlorMask;
@@ -12,12 +12,6 @@ public class PlayerController : MonoBehaviour
     //Private vars
     private Vector3 direction;
 
-    //CONSTs
-    const int RAY_LENGTH = 100;
-    const string INPUT_MOUSE_LEFT = "Fire1";
-    const int GAME_RESUME = 1;
-    const int GAME_PAUSE = 0;
-
     //Components
     MovementCharacter myMovement;
     AnimationCharacter myAnimator;
@@ -26,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     void Start() 
     {
-        Time.timeScale = GAME_RESUME;
+        Time.timeScale = Constants.GAME_RESUME;
         myMovement = GetComponent<MovementCharacter>();
         myAnimator = GetComponent<AnimationCharacter>();
         myStatus = GetComponent<Status>();
@@ -42,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
         myAnimator.Walk(direction.magnitude);
 
-        if (myStatus.Life <= 0 && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
+        if (myStatus.Life <= 0 && Input.GetButtonDown(Constants.INPUT_MOUSE_LEFT)) {
             SceneManager.LoadScene("MainScene");
         }
     }
@@ -54,28 +48,33 @@ public class PlayerController : MonoBehaviour
         PlayerMovement();
     }
 
-    public void takeDamage(int damageTaked) 
-    {
-        myStatus.Life -= damageTaked;
-        UIController.updatedLivePlayerSlider();
-        SoundController.instance.PlayOneShot(DamageSound);
-        if (myStatus.Life <= 0) {
-            Time.timeScale = GAME_PAUSE;
-            GameOverComponent.SetActive(true);
-        }
-    }
-
     void PlayerMovement()
     {
         Ray rayCamera = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit rayCameraImpact;
 
-        if (Physics.Raycast(rayCamera,out rayCameraImpact, RAY_LENGTH, FlorMask)) {
+        if (Physics.Raycast(rayCamera,out rayCameraImpact, Constants.RAY_LENGTH, FlorMask)) {
             Vector3 playerLookPosition = rayCameraImpact.point - transform.position;
             playerLookPosition.y = transform.position.y;
 
             myMovement.Rotation(playerLookPosition);
         }
+    }
+
+    public void TakeDamage(int damageTaked) 
+    {
+        myStatus.Life -= damageTaked;
+        UIController.updatedLivePlayerSlider();
+        SoundController.instance.PlayOneShot(DamageSound);
+        if (myStatus.Life <= 0) {
+            Dead();
+        }
+    }
+
+    public void Dead()
+    {
+        Time.timeScale = Constants.GAME_PAUSE;
+        GameOverComponent.SetActive(true);
     }
 }

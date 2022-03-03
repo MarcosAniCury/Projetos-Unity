@@ -1,15 +1,13 @@
 using UnityEngine;
 
-public class ZombieController : MonoBehaviour
+public class ZombieController : MonoBehaviour, IDeadly
 {
     //Public vars
     public int DamageCaused = 30;
+    public AudioClip ZombieDieSound;
 
     //Private vars
     private GameObject player;
-
-    //CONSTs
-    const string TAG_PLAYER = "Player";
 
     //Components
     PlayerController playerController;
@@ -20,7 +18,7 @@ public class ZombieController : MonoBehaviour
 
     void Start() 
     {
-        player = GameObject.FindWithTag(TAG_PLAYER);
+        player = GameObject.FindWithTag(Constants.TAG_PLAYER);
         playerController = player.GetComponent<PlayerController>(); 
         myMovement = GetComponent<MovementCharacter>(); 
         myAnimation = GetComponent<AnimationCharacter>();
@@ -50,12 +48,26 @@ public class ZombieController : MonoBehaviour
 
     void AttackPlayer() 
     {
-        playerController.takeDamage(DamageCaused);
+        playerController.TakeDamage(DamageCaused);
     }
 
     void SetZombieRandom()
     {
         int generateTypeZombie = Random.Range(1, 28);
         transform.GetChild(generateTypeZombie).gameObject.SetActive(true);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        myStatus.Life -= damage;
+        if (myStatus.Life <= 0) {
+            Dead();
+        }
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject);
+        SoundController.instance.PlayOneShot(ZombieDieSound);
     }
 }

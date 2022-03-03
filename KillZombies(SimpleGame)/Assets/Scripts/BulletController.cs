@@ -4,10 +4,9 @@ public class BulletController : MonoBehaviour
 {
     //public vars
     public float BulletSpeed = 20;
-    public AudioClip ZombieDieSound;
 
     //CONSTs
-    const string TAG_ENEMY = "Enemy";
+    const int DAMAGE_IN_ZOMBIE = 1;
 
     //Components
     Rigidbody bulletRigidbody;
@@ -30,9 +29,8 @@ public class BulletController : MonoBehaviour
 
     void OnTriggerEnter(Collider colliderObject) 
     {
-        if (colliderObject.tag == TAG_ENEMY) {
-            Destroy(colliderObject.gameObject);
-            SoundController.instance.PlayOneShot(ZombieDieSound);
+        if (colliderObject.tag == Constants.TAG_ENEMY) {
+            colliderObject.GetComponent<ZombieController>().TakeDamage(DAMAGE_IN_ZOMBIE);
         }
 
         Destroy(gameObject);

@@ -9,13 +9,10 @@ public class UIController : MonoBehaviour
     //Private vars
     PlayerController playerController;
 
-    //CONSTs
-    const string TAG_PLAYER = "Player";
-
     void Start()
     {
         playerController = GameObject.
-            FindWithTag(TAG_PLAYER).
+            FindWithTag(Constants.TAG_PLAYER).
             GetComponent<PlayerController>();
         LifePlayerSlider.maxValue = playerController.myStatus.Life;
         LifePlayerSlider.value = playerController.myStatus.Life;
