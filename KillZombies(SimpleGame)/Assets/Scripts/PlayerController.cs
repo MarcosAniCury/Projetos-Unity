@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 direction;
 
     //CONSTs
-    const string ANIMATOR_RUNNING = "Running";
-
     const int RAY_LENGTH = 100;
     const string INPUT_MOUSE_LEFT = "Fire1";
     const int GAME_RESUME = 1;
@@ -24,11 +22,13 @@ public class PlayerController : MonoBehaviour
 
     //Components
     MovementCharacter myMovement;
+    AnimationCharacter myAnimator;
 
     void Start() 
     {
         Time.timeScale = GAME_RESUME;
         myMovement = GetComponent<MovementCharacter>();
+        myAnimator = GetComponent<AnimationCharacter>();
     }
     
     void Update()
@@ -39,9 +39,7 @@ public class PlayerController : MonoBehaviour
 
         direction = new Vector3(axisX, 0, axisZ);
 
-        bool running = direction != Vector3.zero;
-
-        GetComponent<Animator>().SetBool(ANIMATOR_RUNNING, running);
+        myAnimator.Walk(direction.magnitude);
 
         if (Life <= 0 && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
             SceneManager.LoadScene("MainScene");
@@ -52,16 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         myMovement.Movement(direction, PlayerSpeed);
 
-        Ray rayCamera = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit rayCameraImpact;
-
-        if (Physics.Raycast(rayCamera,out rayCameraImpact, RAY_LENGTH, FlorMask)) {
-            Vector3 playerLookPosition = rayCameraImpact.point - transform.position;
-            playerLookPosition.y = transform.position.y;
-
-            myMovement.Rotation(playerLookPosition);
-        }
+        PlayerMovement();
     }
 
     public void takeDamage(int damageTaked) 
@@ -72,6 +61,20 @@ public class PlayerController : MonoBehaviour
         if (Life <= 0) {
             Time.timeScale = GAME_PAUSE;
             GameOverComponent.SetActive(true);
+        }
+    }
+
+    void PlayerMovement()
+    {
+        Ray rayCamera = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit rayCameraImpact;
+
+        if (Physics.Raycast(rayCamera,out rayCameraImpact, RAY_LENGTH, FlorMask)) {
+            Vector3 playerLookPosition = rayCameraImpact.point - transform.position;
+            playerLookPosition.y = transform.position.y;
+
+            myMovement.Rotation(playerLookPosition);
         }
     }
 }

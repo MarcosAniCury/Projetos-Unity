@@ -11,21 +11,22 @@ public class ZombieController : MonoBehaviour
     private GameObject player;
 
     //CONSTs
-    const string ANIMATOR_ATTACKING = "Attacking";
     const string TAG_PLAYER = "Player";
 
     //Components
     PlayerController playerController;
     MovementCharacter myMovement;
+    AnimationCharacter myAnimation;
 
 
     void Start() 
     {
         player = GameObject.FindWithTag(TAG_PLAYER);
-        int generateTypeZombie = Random.Range(1, 28);
-        transform.GetChild(generateTypeZombie).gameObject.SetActive(true);
         playerController = player.GetComponent<PlayerController>(); 
         myMovement = GetComponent<MovementCharacter>(); 
+        myAnimation = GetComponent<AnimationCharacter>();
+
+        SetZombieRandom();
     }
 
     void FixedUpdate()
@@ -45,11 +46,17 @@ public class ZombieController : MonoBehaviour
             attacking = false;
         } 
         
-        GetComponent<Animator>().SetBool(ANIMATOR_ATTACKING, attacking);
+        myAnimation.Attack(attacking);
     }
 
     void AttackPlayer() 
     {
         playerController.takeDamage(DamageCaused);
+    }
+
+    void SetZombieRandom()
+    {
+        int generateTypeZombie = Random.Range(1, 28);
+        transform.GetChild(generateTypeZombie).gameObject.SetActive(true);
     }
 }
