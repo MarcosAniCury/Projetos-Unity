@@ -7,7 +7,10 @@ public class ZombieController : MonoBehaviour, IDeadly
     public AudioClip ZombieDieSound;
 
     //Private vars
-    private GameObject player;
+    GameObject player;
+    float contWander;
+    Vector3 randomPositionWander;
+    Vector3 direction;
 
     //Components
     PlayerController playerController;
@@ -15,6 +18,12 @@ public class ZombieController : MonoBehaviour, IDeadly
     AnimationCharacter myAnimation;
     Status myStatus;
 
+    //CONSTs
+    const double DISTANCE_TO_ZOMBIE_CHASE = 2.5;
+    const double DISTANCE_TO_ZOMBIE_WANDER = 15;
+    const float TIME_BETWEEN_WANDER_AGAIN = 4;
+    const double ERROR_RATE_DISTANCE_ZOMBIE = 0.05;
+    const int RADIO_TO_GENERATE_RANDOM_POSITION = 8;
 
     void Start() 
     {
@@ -33,17 +42,48 @@ public class ZombieController : MonoBehaviour, IDeadly
             transform.position, player.transform.position
         );
 
-        Vector3 direction = player.transform.position - transform.position;
         myMovement.Rotation(direction);
+        myAnimation.Walk(direction.magnitude);
 
         bool attacking = true;
-
-        if (distanceBetweenZombiAndPlayer > 2.5) {
+        if (distanceBetweenZombiAndPlayer > DISTANCE_TO_ZOMBIE_WANDER) {
+            Wander();
+            attacking = false;
+        } else if (distanceBetweenZombiAndPlayer > DISTANCE_TO_ZOMBIE_CHASE) {
+            direction = player.transform.position - transform.position;
             myMovement.Movement(direction.normalized, myStatus.Speed);
             attacking = false;
         } 
         
         myAnimation.Attack(attacking);
+    }
+
+    void Wander()
+    {
+        contWander -= Time.deltaTime;
+
+        if (contWander <= 0) {
+            randomPositionWander = GenerateRandomPosition();
+            contWander += TIME_BETWEEN_WANDER_AGAIN;
+        }
+
+        bool isProxDistance = 
+            Vector3.Distance(transform.position, randomPositionWander) <=
+            ERROR_RATE_DISTANCE_ZOMBIE;
+
+        if (!isProxDistance) {
+            direction = randomPositionWander - transform.position;
+            myMovement.Movement(direction.normalized, myStatus.Speed);
+        }
+    }
+
+    Vector3 GenerateRandomPosition()
+    {
+        Vector3 position = Random.insideUnitSphere * RADIO_TO_GENERATE_RANDOM_POSITION;
+        position += transform.position;
+        position.y = transform.position.y;
+
+        return position;
     }
 
     void AttackPlayer() 
