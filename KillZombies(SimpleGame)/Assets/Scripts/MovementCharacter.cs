@@ -14,7 +14,7 @@ public class MovementCharacter : MonoBehaviour
     public void Movement(Vector3 direction, float speedMovement)
     {
         //Way to move the character using physics
-        myRigidbody.velocity = direction * speedMovement;
+        myRigidbody.velocity = direction.normalized * speedMovement;
     }
 
     public void Rotation(Vector3 direction)

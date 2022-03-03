@@ -42,19 +42,18 @@ public class ZombieController : MonoBehaviour, IDeadly
             transform.position, player.transform.position
         );
 
-        myMovement.Rotation(direction);
-        myAnimation.Walk(direction.magnitude);
-
         bool attacking = true;
         if (distanceBetweenZombiAndPlayer > DISTANCE_TO_ZOMBIE_WANDER) {
             Wander();
             attacking = false;
         } else if (distanceBetweenZombiAndPlayer > DISTANCE_TO_ZOMBIE_CHASE) {
             direction = player.transform.position - transform.position;
+            myMovement.Rotation(direction);
             myMovement.Movement(direction.normalized, myStatus.Speed);
             attacking = false;
         } 
-        
+
+        myAnimation.Walk(direction.magnitude);
         myAnimation.Attack(attacking);
     }
 
@@ -67,14 +66,19 @@ public class ZombieController : MonoBehaviour, IDeadly
             contWander += TIME_BETWEEN_WANDER_AGAIN;
         }
 
+        float speedMovement = 0;
+
         bool isProxDistance = 
             Vector3.Distance(transform.position, randomPositionWander) <=
             ERROR_RATE_DISTANCE_ZOMBIE;
 
         if (!isProxDistance) {
             direction = randomPositionWander - transform.position;
-            myMovement.Movement(direction.normalized, myStatus.Speed);
+            myMovement.Rotation(direction);
+            speedMovement = myStatus.Speed;
         }
+
+        myMovement.Movement(direction, speedMovement);
     }
 
     Vector3 GenerateRandomPosition()
