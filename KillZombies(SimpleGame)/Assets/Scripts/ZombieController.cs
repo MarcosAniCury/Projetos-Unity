@@ -23,7 +23,7 @@ public class ZombieController : MonoBehaviour, IDeadly
     const double DISTANCE_TO_ZOMBIE_WANDER = 15;
     const float TIME_BETWEEN_WANDER_AGAIN = 4;
     const double ERROR_RATE_DISTANCE_ZOMBIE = 0.05;
-    const int RADIO_TO_GENERATE_RANDOM_POSITION = 8;
+    const int RADIO_TO_GENERATE_RANDOM_POSITION = 10;
 
     void Start() 
     {

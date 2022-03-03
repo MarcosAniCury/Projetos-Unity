@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour, IDeadly
     void Update()
     {
         //Use to walk with awsd
-        float axisX = Input.GetAxis("Horizontal");
-        float axisZ = Input.GetAxis("Vertical");
+        float axisX = Input.GetAxisRaw("Horizontal");
+        float axisZ = Input.GetAxisRaw("Vertical");
 
         direction = new Vector3(axisX, 0, axisZ);
 
