@@ -3,8 +3,6 @@ using UnityEngine;
 public class ZombieController : MonoBehaviour
 {
     //Public vars
-    public float ZombiSpeed = 5;
-
     public int DamageCaused = 30;
 
     //Private vars
@@ -17,6 +15,7 @@ public class ZombieController : MonoBehaviour
     PlayerController playerController;
     MovementCharacter myMovement;
     AnimationCharacter myAnimation;
+    Status myStatus;
 
 
     void Start() 
@@ -25,6 +24,7 @@ public class ZombieController : MonoBehaviour
         playerController = player.GetComponent<PlayerController>(); 
         myMovement = GetComponent<MovementCharacter>(); 
         myAnimation = GetComponent<AnimationCharacter>();
+        myStatus = GetComponent<Status>();
 
         SetZombieRandom();
     }
@@ -35,14 +35,13 @@ public class ZombieController : MonoBehaviour
             transform.position, player.transform.position
         );
 
-        //Zombi Rotation
         Vector3 direction = player.transform.position - transform.position;
         myMovement.Rotation(direction);
 
         bool attacking = true;
 
         if (distanceBetweenZombiAndPlayer > 2.5) {
-            myMovement.Movement(direction.normalized, ZombiSpeed);
+            myMovement.Movement(direction.normalized, myStatus.Speed);
             attacking = false;
         } 
         

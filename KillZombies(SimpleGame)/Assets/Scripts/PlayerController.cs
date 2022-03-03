@@ -4,10 +4,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     //Public vars
-    public float PlayerSpeed = 10;
     public LayerMask FlorMask;
     public GameObject GameOverComponent;
-    public int Life = 100;
     public UIController UIController;
     public AudioClip DamageSound;
     
@@ -23,12 +21,15 @@ public class PlayerController : MonoBehaviour
     //Components
     MovementCharacter myMovement;
     AnimationCharacter myAnimator;
+    [HideInInspector]
+    public Status myStatus;
 
     void Start() 
     {
         Time.timeScale = GAME_RESUME;
         myMovement = GetComponent<MovementCharacter>();
         myAnimator = GetComponent<AnimationCharacter>();
+        myStatus = GetComponent<Status>();
     }
     
     void Update()
@@ -41,24 +42,24 @@ public class PlayerController : MonoBehaviour
 
         myAnimator.Walk(direction.magnitude);
 
-        if (Life <= 0 && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
+        if (myStatus.Life <= 0 && Input.GetButtonDown(INPUT_MOUSE_LEFT)) {
             SceneManager.LoadScene("MainScene");
         }
     }
 
     void FixedUpdate() 
     {
-        myMovement.Movement(direction, PlayerSpeed);
+        myMovement.Movement(direction, myStatus.Speed);
 
         PlayerMovement();
     }
 
     public void takeDamage(int damageTaked) 
     {
-        Life -= damageTaked;
+        myStatus.Life -= damageTaked;
         UIController.updatedLivePlayerSlider();
         SoundController.instance.PlayOneShot(DamageSound);
-        if (Life <= 0) {
+        if (myStatus.Life <= 0) {
             Time.timeScale = GAME_PAUSE;
             GameOverComponent.SetActive(true);
         }

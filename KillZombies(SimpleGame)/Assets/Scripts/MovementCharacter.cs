@@ -23,7 +23,7 @@ public class MovementCharacter : MonoBehaviour
 
     public void Rotation(Vector3 direction)
     {
-        Quaternion zombiDirection = Quaternion.LookRotation(direction);
-        myRigidbody.MoveRotation(zombiDirection);
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        myRigidbody.MoveRotation(rotation);
     }
 }
