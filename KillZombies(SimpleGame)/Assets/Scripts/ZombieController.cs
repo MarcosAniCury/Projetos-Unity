@@ -5,6 +5,7 @@ public class ZombieController : MonoBehaviour, IDeadly
     //Public vars
     public int DamageCaused = 30;
     public AudioClip ZombieDieSound;
+    public GameObject MedKitPrefab;
 
     //Private vars
     GameObject player;
@@ -22,8 +23,9 @@ public class ZombieController : MonoBehaviour, IDeadly
     const double DISTANCE_TO_ZOMBIE_CHASE = 2.5;
     const double DISTANCE_TO_ZOMBIE_WANDER = 15;
     const float TIME_BETWEEN_WANDER_AGAIN = 4;
-    const double ERROR_RATE_DISTANCE_ZOMBIE = 0.05;
+    const float ERROR_RATE_DISTANCE_ZOMBIE = 0.05f;
     const int RADIO_TO_GENERATE_RANDOM_POSITION = 10;
+    const float CHANCE_TO_GENERATE_MED_KIT = 0.1f;
 
     void Start() 
     {
@@ -112,6 +114,16 @@ public class ZombieController : MonoBehaviour, IDeadly
     public void Dead()
     {
         Destroy(gameObject);
+
+        GenerateMedKit();
+        
         SoundController.instance.PlayOneShot(ZombieDieSound);
+    }
+
+    void GenerateMedKit()
+    {   
+        if(Random.value <= CHANCE_TO_GENERATE_MED_KIT) {
+            Instantiate(MedKitPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

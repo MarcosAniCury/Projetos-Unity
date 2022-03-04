@@ -648,6 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageCaused: 30
   ZombieDieSound: {fileID: 8300000, guid: 5f1712b1416285a4eaadd4a8a06e03ad, type: 3}
+  MedKitPrefab: {fileID: 1060151288946202, guid: 6150c6f66b7034ec5b3672478195682a, type: 3}
 --- !u!54 &3461041793517904527
 Rigidbody:
   m_ObjectHideFlags: 0

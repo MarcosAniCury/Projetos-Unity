@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDeadly
+public class PlayerController : MonoBehaviour, IDeadly, ICurable
 {
     //Public vars
     public LayerMask FlorMask;
@@ -58,11 +58,24 @@ public class PlayerController : MonoBehaviour, IDeadly
     public void TakeDamage(int damageTaked) 
     {
         myStatus.Life -= damageTaked;
+
         UIController.updatedLivePlayerSlider();
+
         SoundController.instance.PlayOneShot(DamageSound);
+        
         if (myStatus.Life <= 0) {
             Dead();
         }
+    }
+
+    public void Healing(int amountHeal)
+    {
+        myStatus.Life += amountHeal;
+        if (myStatus.Life > myStatus.InitialLife) {
+            myStatus.Life = myStatus.InitialLife;
+        }
+
+        UIController.updatedLivePlayerSlider();
     }
 
     public void Dead()
