@@ -12,7 +12,10 @@ public class Constants : MonoBehaviour
     //OTHERs
     public const int RAY_LENGTH = 100;
 
-    //GAME PAUSE
+    //GAME PAUSE/RESUME
     public const int GAME_RESUME = 1;
     public const int GAME_PAUSE = 0;
+
+    //Player prefs
+    public const string PLAYER_PREFS_MAX_TIME_SURVIVE = "MaxTimeSurvive";
 }

@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IDeadly
 {
     //Public vars
     public LayerMask FlorMask;
-    public GameObject GameOverComponent;
     public UIController UIController;
     public AudioClip DamageSound;
     
@@ -20,7 +18,6 @@ public class PlayerController : MonoBehaviour, IDeadly
 
     void Start() 
     {
-        Time.timeScale = Constants.GAME_RESUME;
         myMovement = GetComponent<MovementCharacter>();
         myAnimator = GetComponent<AnimationCharacter>();
         myStatus = GetComponent<Status>();
@@ -35,10 +32,6 @@ public class PlayerController : MonoBehaviour, IDeadly
         direction = new Vector3(axisX, 0, axisZ);
 
         myAnimator.Walk(direction.magnitude);
-
-        if (myStatus.Life <= 0 && Input.GetButtonDown(Constants.INPUT_MOUSE_LEFT)) {
-            SceneManager.LoadScene("MainScene");
-        }
     }
 
     void FixedUpdate() 
@@ -74,7 +67,6 @@ public class PlayerController : MonoBehaviour, IDeadly
 
     public void Dead()
     {
-        Time.timeScale = Constants.GAME_PAUSE;
-        GameOverComponent.SetActive(true);
+        UIController.GameOver();
     }
 }
