@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageCaused: 30
-  ZombieDieSound: {fileID: 8300000, guid: f724f8c41d804fd46a3b68d6c3be7074, type: 3}
+  ZombieDieSound: {fileID: 8300000, guid: 5f1712b1416285a4eaadd4a8a06e03ad, type: 3}
 --- !u!54 &3461041793517904527
 Rigidbody:
   m_ObjectHideFlags: 0

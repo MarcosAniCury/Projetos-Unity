@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4656246329960846, guid: bf4e53320739441f58d231c2ee884b66, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4656246329960846, guid: bf4e53320739441f58d231c2ee884b66, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4922,7 +4922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4748218072112664, guid: 417f148e4549341348fb7d602123630e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.9802294e-10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4748218072112664, guid: 417f148e4549341348fb7d602123630e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5475,7 +5475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4585601856761568, guid: 68d2e588be11c45b5bcef522aa3f7cca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000017881393
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4585601856761568, guid: 68d2e588be11c45b5bcef522aa3f7cca, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8612,7 +8612,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cca427e373d8d1e40a9dd54f095e51a5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b4fcddde9395dda41a16d5febfe8eb6b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -9961,6 +9961,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1116728030, guid: 4b3bb44effa49480d8d18049684cc33a, type: 3}
+      propertyPath: DamageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 626bb7c4da983544f80bdfd96fcd4ea1, type: 3}
+    - target: {fileID: 1116728030, guid: 4b3bb44effa49480d8d18049684cc33a, type: 3}
       propertyPath: UIController
       value: 
       objectReference: {fileID: 1342715413}
@@ -9968,6 +9972,10 @@ PrefabInstance:
       propertyPath: GameOverComponent
       value: 
       objectReference: {fileID: 1970223242}
+    - target: {fileID: 1116728035, guid: 4b3bb44effa49480d8d18049684cc33a, type: 3}
+      propertyPath: ShotSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 90f99810b552d734cb0ea3fea37f6db0, type: 3}
     - target: {fileID: 1884102019447498, guid: 4b3bb44effa49480d8d18049684cc33a, type: 3}
       propertyPath: m_Name
       value: Personagens
