@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
 
     //Private vars
     float bestTimeSurvive;
+    int zombiesKilled;
 
     //Components
     PlayerController playerController;
@@ -50,6 +51,11 @@ public class UIController : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void AddOneZombieDead()
+    {
+        zombiesKilled++;
     }
 
     void MaxTimeSurvive(int min, int seg)
