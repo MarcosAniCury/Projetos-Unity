@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     public GameObject GameOverPanel;
     public Text TimeSurviveEndGame;
     public Text TimeSurviveMaxEndGame;
+    public Text KilledCount;
 
     //Private vars
     float bestTimeSurvive;
@@ -56,6 +57,7 @@ public class UIController : MonoBehaviour
     public void AddOneZombieDead()
     {
         zombiesKilled++;
+        KilledCount.text = string.Format("{0}", zombiesKilled);
     }
 
     void MaxTimeSurvive(int min, int seg)
