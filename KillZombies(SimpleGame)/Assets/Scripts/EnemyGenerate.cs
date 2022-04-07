@@ -10,8 +10,10 @@ public class EnemyGenerate : MonoBehaviour
 
     //Private vars
     private float timeCount;
-    private int enemysMaxAlive = 5;
+    private int enemysMaxAlive = 2;
     private int enemysAlive = 0;
+    private float timeToIncreseNumberOfMaxEnemys = 10;
+    private float countTimeIncreseNumberOfMaxEnemys;
 
     //Components
     GameObject player;
@@ -23,7 +25,9 @@ public class EnemyGenerate : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag(Constants.TAG_PLAYER);
-        for (int i = 0; i < enemysMaxAlive; i++) {
+        countTimeIncreseNumberOfMaxEnemys = timeToIncreseNumberOfMaxEnemys;
+        for (int i = 0; i < enemysMaxAlive; i++)
+        {
             StartCoroutine(GenerateZombie());
         }
     }
@@ -34,14 +38,22 @@ public class EnemyGenerate : MonoBehaviour
             transform.position,
             player.transform.position
         ) > DISTANCE_BETWEEN_PLAYER_AND_ENEMY_TO_SPAWN);
-        
-        if (canGenerateEnemy && enemysAlive < enemysMaxAlive) {
+
+        if (canGenerateEnemy && enemysAlive < enemysMaxAlive)
+        {
             timeCount += Time.deltaTime;
 
-            if (timeCount > GenerateEnemyTime) {
+            if (timeCount > GenerateEnemyTime)
+            {
                 StartCoroutine(GenerateZombie());
                 timeCount = 0;
             }
+        }
+
+        if (Time.timeSinceLevelLoad > countTimeIncreseNumberOfMaxEnemys)
+        {
+            enemysMaxAlive++;
+            countTimeIncreseNumberOfMaxEnemys = Time.timeSinceLevelLoad + timeToIncreseNumberOfMaxEnemys;
         }
     }
 
@@ -49,12 +61,16 @@ public class EnemyGenerate : MonoBehaviour
     {
         Vector3 randomPosition;
         Collider[] colliders;
-        do {
+        do
+        {
             randomPosition = GenerateRandomPosition();
             colliders = Physics.OverlapSphere(randomPosition, 1, LayerEnemys);
             yield return null;
         } while (colliders.Length > 0);
-        Instantiate(Zombie, randomPosition, transform.rotation);
+
+        ZombieController zombie = Instantiate(Zombie, randomPosition, transform.rotation)
+            .GetComponent<ZombieController>();
+        zombie.MyGenerate = this;
         enemysAlive++;
     }
 
@@ -71,5 +87,10 @@ public class EnemyGenerate : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, RADIO_TO_GENERATE_RANDOM_POSITION);
+    }
+
+    public void DecreseNumberOfZombieAlive()
+    {
+        enemysAlive--;
     }
 }

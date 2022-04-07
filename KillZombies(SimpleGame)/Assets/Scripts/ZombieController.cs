@@ -6,6 +6,9 @@ public class ZombieController : MonoBehaviour, IDeadly
     public int DamageCaused = 30;
     public AudioClip ZombieDieSound;
     public GameObject MedKitPrefab;
+    
+    [HideInInspector]
+    public EnemyGenerate MyGenerate;
 
     //Private vars
     GameObject player;
@@ -120,6 +123,8 @@ public class ZombieController : MonoBehaviour, IDeadly
         GenerateMedKit();
 
         gameInterface.AddOneZombieDead();
+        
+        MyGenerate.DecreseNumberOfZombieAlive();
         
         SoundController.instance.PlayOneShot(ZombieDieSound);
     }
