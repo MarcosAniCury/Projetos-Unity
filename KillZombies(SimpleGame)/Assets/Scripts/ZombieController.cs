@@ -18,6 +18,7 @@ public class ZombieController : MonoBehaviour, IDeadly
     MovementCharacter myMovement;
     AnimationCharacter myAnimation;
     Status myStatus;
+    UIController canvas;
 
     //CONSTs
     const double DISTANCE_TO_ZOMBIE_CHASE = 2.5;
@@ -34,6 +35,7 @@ public class ZombieController : MonoBehaviour, IDeadly
         myMovement = GetComponent<MovementCharacter>(); 
         myAnimation = GetComponent<AnimationCharacter>();
         myStatus = GetComponent<Status>();
+        canvas = GameObject.FindObjectOfType(typeof(UIController)) as UIController;
 
         SetZombieRandom();
     }
@@ -116,6 +118,7 @@ public class ZombieController : MonoBehaviour, IDeadly
         Destroy(gameObject);
 
         GenerateMedKit();
+        canvas.AddOneZombieDead();
         
         SoundController.instance.PlayOneShot(ZombieDieSound);
     }
