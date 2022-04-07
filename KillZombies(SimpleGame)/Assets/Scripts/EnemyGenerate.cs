@@ -10,6 +10,8 @@ public class EnemyGenerate : MonoBehaviour
 
     //Private vars
     private float timeCount;
+    private int enemysMaxAlive = 5;
+    private int enemysAlive = 0;
 
     //Components
     GameObject player;
@@ -21,14 +23,19 @@ public class EnemyGenerate : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag(Constants.TAG_PLAYER);
+        for (int i = 0; i < enemysMaxAlive; i++) {
+            StartCoroutine(GenerateZombie());
+        }
     }
 
     void Update()
     {
-        if (Vector3.Distance(
-                transform.position, 
-                player.transform.position
-            ) > DISTANCE_BETWEEN_PLAYER_AND_ENEMY_TO_SPAWN) {
+        bool canGenerateEnemy = (Vector3.Distance(
+            transform.position,
+            player.transform.position
+        ) > DISTANCE_BETWEEN_PLAYER_AND_ENEMY_TO_SPAWN);
+        
+        if (canGenerateEnemy && enemysAlive < enemysMaxAlive) {
             timeCount += Time.deltaTime;
 
             if (timeCount > GenerateEnemyTime) {
@@ -48,6 +55,7 @@ public class EnemyGenerate : MonoBehaviour
             yield return null;
         } while (colliders.Length > 0);
         Instantiate(Zombie, randomPosition, transform.rotation);
+        enemysAlive++;
     }
 
     Vector3 GenerateRandomPosition()
