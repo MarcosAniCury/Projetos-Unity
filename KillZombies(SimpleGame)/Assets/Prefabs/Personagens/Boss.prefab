@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 4941635705825534}
   - component: {fileID: 152600559}
   - component: {fileID: 152600561}
-  - component: {fileID: 152600560}
   - component: {fileID: 3461041793517904527}
   - component: {fileID: 498431117840892221}
   - component: {fileID: 2849037040868565358}
@@ -103,22 +102,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &152600560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063500868937916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebdc611f38b6e248a8163e735d84f9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageCaused: 30
-  ZombieDieSound: {fileID: 8300000, guid: 5f1712b1416285a4eaadd4a8a06e03ad, type: 3}
-  MedKitPrefab: {fileID: 1060151288946202, guid: 6150c6f66b7034ec5b3672478195682a, type: 3}
-  MyGenerate: {fileID: 0}
 --- !u!54 &3461041793517904527
 Rigidbody:
   m_ObjectHideFlags: 0
