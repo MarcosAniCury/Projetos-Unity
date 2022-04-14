@@ -70,7 +70,8 @@ public class ZombieController : MonoBehaviour, IDeadly
 
         if (contWander <= 0) {
             randomPositionWander = GenerateRandomPosition();
-            contWander += TIME_BETWEEN_WANDER_AGAIN;
+            float randomTimeToSpawn = Random.Range(-1f, 1f);
+            contWander += TIME_BETWEEN_WANDER_AGAIN + randomTimeToSpawn;
         }
 
         float speedMovement = 0;
