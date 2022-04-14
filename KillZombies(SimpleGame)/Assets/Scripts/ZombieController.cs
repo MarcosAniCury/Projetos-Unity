@@ -119,8 +119,12 @@ public class ZombieController : MonoBehaviour, IDeadly
 
     public void Dead()
     {
-        Destroy(gameObject);
+        int timeToZombieDestroy = 2;
+        Destroy(gameObject, timeToZombieDestroy);
 
+        myAnimation.Die();
+        myMovement.Die();
+        
         GenerateMedKit();
 
         gameInterface.AddOneZombieDead();
@@ -128,6 +132,8 @@ public class ZombieController : MonoBehaviour, IDeadly
         MyGenerate.DecreseNumberOfZombieAlive();
         
         SoundController.instance.PlayOneShot(ZombieDieSound);
+
+        this.enabled = false;
     }
 
     void GenerateMedKit()
