@@ -18,10 +18,6 @@ public class EnemyGenerate : MonoBehaviour
     //Components
     GameObject player;
 
-    //CONSTs
-    const int RADIO_TO_GENERATE_RANDOM_POSITION = 3;
-    const int DISTANCE_BETWEEN_PLAYER_AND_ENEMY_TO_SPAWN = 20;
-
     void Start()
     {
         player = GameObject.FindWithTag(Constants.TAG_PLAYER);
@@ -37,7 +33,7 @@ public class EnemyGenerate : MonoBehaviour
         bool canGenerateEnemy = (Vector3.Distance(
             transform.position,
             player.transform.position
-        ) > DISTANCE_BETWEEN_PLAYER_AND_ENEMY_TO_SPAWN);
+        ) > Constants.ENEMY_GENERATE_DISTANCE_BETWEEN_PLAYER_AND_ENEMY_TO_SPAWN);
 
         if (canGenerateEnemy && enemysAlive < enemysMaxAlive)
         {
@@ -76,7 +72,7 @@ public class EnemyGenerate : MonoBehaviour
 
     Vector3 GenerateRandomPosition()
     {
-        Vector3 position = Random.insideUnitSphere * RADIO_TO_GENERATE_RANDOM_POSITION;
+        Vector3 position = Random.insideUnitSphere * Constants.ENEMY_GENERATE_RADIO_TO_GENERATE_RANDOM_POSITION;
         position += transform.position;
         position.y = transform.position.y;
 
@@ -86,7 +82,7 @@ public class EnemyGenerate : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, RADIO_TO_GENERATE_RANDOM_POSITION);
+        Gizmos.DrawWireSphere(transform.position, Constants.ENEMY_GENERATE_RADIO_TO_GENERATE_RANDOM_POSITION);
     }
 
     public void DecreseNumberOfZombieAlive()

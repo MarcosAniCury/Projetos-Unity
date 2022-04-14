@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MovementCharacter : MonoBehaviour
 {
-
     //Components
     Rigidbody myRigidbody;
 

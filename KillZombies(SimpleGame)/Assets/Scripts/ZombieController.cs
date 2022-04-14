@@ -23,14 +23,6 @@ public class ZombieController : MonoBehaviour, IDeadly
     Status myStatus;
     UIController gameInterface;
 
-    //CONSTs
-    const double DISTANCE_TO_ZOMBIE_CHASE = 2.5;
-    const double DISTANCE_TO_ZOMBIE_WANDER = 15;
-    const float TIME_BETWEEN_WANDER_AGAIN = 4;
-    const float ERROR_RATE_DISTANCE_ZOMBIE = 0.05f;
-    const int RADIO_TO_GENERATE_RANDOM_POSITION = 10;
-    const float CHANCE_TO_GENERATE_MED_KIT = 0.1f;
-
     void Start() 
     {
         player = GameObject.FindWithTag(Constants.TAG_PLAYER);
@@ -50,10 +42,10 @@ public class ZombieController : MonoBehaviour, IDeadly
         );
 
         bool attacking = true;
-        if (distanceBetweenZombiAndPlayer > DISTANCE_TO_ZOMBIE_WANDER) {
+        if (distanceBetweenZombiAndPlayer > Constants.ZOMBIE_DISTANCE_TO_WANDER) {
             Wander();
             attacking = false;
-        } else if (distanceBetweenZombiAndPlayer > DISTANCE_TO_ZOMBIE_CHASE) {
+        } else if (distanceBetweenZombiAndPlayer > Constants.ZOMBIE_DISTANCE_TO_CHASE) {
             direction = player.transform.position - transform.position;
             myMovement.Rotation(direction);
             myMovement.Movement(direction.normalized, myStatus.Speed);
@@ -71,14 +63,14 @@ public class ZombieController : MonoBehaviour, IDeadly
         if (contWander <= 0) {
             randomPositionWander = GenerateRandomPosition();
             float randomTimeToSpawn = Random.Range(-1f, 1f);
-            contWander += TIME_BETWEEN_WANDER_AGAIN + randomTimeToSpawn;
+            contWander += Constants.ZOMBIE_TIME_BETWEEN_WANDER_AGAIN + randomTimeToSpawn;
         }
 
         float speedMovement = 0;
 
         bool isProxDistance = 
             Vector3.Distance(transform.position, randomPositionWander) <=
-            ERROR_RATE_DISTANCE_ZOMBIE;
+            Constants.ZOMBIE_ERROR_RATE_DISTANCE;
 
         if (!isProxDistance) {
             direction = randomPositionWander - transform.position;
@@ -91,7 +83,7 @@ public class ZombieController : MonoBehaviour, IDeadly
 
     Vector3 GenerateRandomPosition()
     {
-        Vector3 position = Random.insideUnitSphere * RADIO_TO_GENERATE_RANDOM_POSITION;
+        Vector3 position = Random.insideUnitSphere * Constants.ZOMBIE_RADIO_TO_GENERATE_RANDOM_POSITION;
         position += transform.position;
         position.y = transform.position.y;
 
@@ -138,7 +130,7 @@ public class ZombieController : MonoBehaviour, IDeadly
 
     void GenerateMedKit()
     {   
-        if(Random.value <= CHANCE_TO_GENERATE_MED_KIT) {
+        if(Random.value <= Constants.ZOMBIE_CHANCE_TO_GENERATE_MED_KIT) {
             Instantiate(MedKitPrefab, transform.position, Quaternion.identity);
         }
     }
