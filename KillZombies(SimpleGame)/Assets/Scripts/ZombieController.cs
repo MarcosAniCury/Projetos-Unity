@@ -3,7 +3,7 @@ using UnityEngine;
 public class ZombieController : MonoBehaviour, IDeadly
 {
     //Public vars
-    public int DamageCaused = 30;
+    public int DamageCaused = 20;
     public AudioClip ZombieDieSound;
     public GameObject MedKitPrefab;
     
