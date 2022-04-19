@@ -1,9 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class BossController : MonoBehaviour
+public class BossController : MonoBehaviour, IDeadly
 {
+    //Public vars
+    public int DamageCause = 40;
+    
     //COMPONENTs
     Transform player;
     NavMeshAgent agent;
@@ -23,7 +25,8 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
-        agent.SetDestination(player.position);
+        Vector3 playerPosition = player.position;
+        agent.SetDestination(playerPosition);
         myAnimation.Walk(agent.velocity.magnitude);
 
         if (agent.hasPath)
@@ -31,8 +34,32 @@ public class BossController : MonoBehaviour
             bool playerClose = agent.remainingDistance <= agent.stoppingDistance;
             myAnimation.Attack(playerClose);
             
-            Vector3 direction = player.position - transform.position;
+            Vector3 direction = playerPosition - transform.position;
             myMovement.Rotation(direction);
         }
+    }
+
+    void AttackPlayer()
+    {
+        player.GetComponent<PlayerController>().TakeDamage(DamageCause);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        myStatus.Life -= damage;
+        if (myStatus.Life <= 0)
+        {
+            Dead();
+        }
+    }
+
+    public void Dead()
+    {
+        Destroy(gameObject, 2);
+        
+        myAnimation.Die();
+        myMovement.Die();
+        this.enabled = false;
+        agent.enabled = false;
     }
 }

@@ -24,10 +24,15 @@ public class BulletController : MonoBehaviour
         );
     }
 
-    void OnTriggerEnter(Collider colliderObject) 
+    void OnTriggerEnter(Collider colliderObject)
     {
-        if (colliderObject.tag == Constants.TAG_ENEMY) {
-            colliderObject.GetComponent<ZombieController>().TakeDamage(Constants.BULLET_DAMAGE_IN_ZOMBIE);
+        switch (colliderObject.tag) {
+           case Constants.TAG_ENEMY:
+               colliderObject.GetComponent<ZombieController>().TakeDamage(Constants.BULLET_DAMAGE_IN_ZOMBIE);
+               break;
+           case Constants.TAG_BOSS:
+               colliderObject.GetComponent<BossController>().TakeDamage(Constants.BULLET_DAMAGE_IN_ZOMBIE);
+               break;
         }
 
         Destroy(gameObject);
