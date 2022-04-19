@@ -5,6 +5,7 @@ public class BossController : MonoBehaviour, IDeadly
 {
     //Public vars
     public int DamageCause = 40;
+    public GameObject MedKitPrefab;
     
     //COMPONENTs
     Transform player;
@@ -61,5 +62,7 @@ public class BossController : MonoBehaviour, IDeadly
         myMovement.Die();
         this.enabled = false;
         agent.enabled = false;
+
+        Instantiate(MedKitPrefab, transform.position, Quaternion.identity);
     }
 }
