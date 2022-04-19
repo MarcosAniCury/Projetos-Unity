@@ -40,7 +40,6 @@ public class Constants : MonoBehaviour
     public const float ZOMBIE_ERROR_RATE_DISTANCE = 0.05f;
     public const int ZOMBIE_RADIO_TO_GENERATE_RANDOM_POSITION = 10;
     public const float ZOMBIE_CHANCE_TO_GENERATE_MED_KIT = 0.1f;
-    public const int ZOMBIE_NUMBER_MAX_SKIN_GENERATE = 27;
 
     //Player prefs
     public const string PLAYER_PREFS_MAX_TIME_SURVIVE = "MaxTimeSurvive";

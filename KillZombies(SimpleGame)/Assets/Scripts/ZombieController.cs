@@ -97,7 +97,7 @@ public class ZombieController : MonoBehaviour, IDeadly
 
     void SetZombieRandom()
     {
-        int generateTypeZombie = Random.Range(1, Constants.ZOMBIE_NUMBER_MAX_SKIN_GENERATE);
+        int generateTypeZombie = Random.Range(1, transform.childCount);
         transform.GetChild(generateTypeZombie).gameObject.SetActive(true);
     }
 

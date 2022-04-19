@@ -11655,6 +11655,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 1063500868937916, guid: cba7462088984b6438f3a88ff2bf33d4, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 4388596583815700, guid: cba7462088984b6438f3a88ff2bf33d4, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.7
@@ -11715,6 +11719,10 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6042435178047785267, guid: cba7462088984b6438f3a88ff2bf33d4, type: 3}
+      propertyPath: MedKitPrefab
+      value: 
+      objectReference: {fileID: 1060151288946202, guid: 6150c6f66b7034ec5b3672478195682a, type: 3}
     - target: {fileID: 7939772759660438305, guid: cba7462088984b6438f3a88ff2bf33d4, type: 3}
       propertyPath: Speed
       value: 4
