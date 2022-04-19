@@ -28,6 +28,7 @@ public class Constants : MonoBehaviour
     //Enemys Generate 
     public const int ENEMY_GENERATE_RADIO_TO_GENERATE_RANDOM_POSITION = 3;
     public const int ENEMY_GENERATE_DISTANCE_BETWEEN_PLAYER_AND_ENEMY_TO_SPAWN = 20;
+    public const int ENEMY_GENERATE_TIME_TO_INCRESE_NUMBER_OF_MAX_ENEMYS = 10;
     
     //Medkit
     public const int MEDKIT_AMOUNT_HEAL = 15;
@@ -43,4 +44,7 @@ public class Constants : MonoBehaviour
 
     //Player prefs
     public const string PLAYER_PREFS_MAX_TIME_SURVIVE = "MaxTimeSurvive";
+    
+    //Boss Generate
+    public const int BOSS_GENERATE_TIME_BETWEEN_GENERATE = 60;
 }

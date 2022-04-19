@@ -12,7 +12,6 @@ public class EnemyGenerate : MonoBehaviour
     private float timeCount;
     private int enemysMaxAlive = 2;
     private int enemysAlive = 0;
-    private float timeToIncreseNumberOfMaxEnemys = 10;
     private float countTimeIncreseNumberOfMaxEnemys;
 
     //Components
@@ -21,7 +20,7 @@ public class EnemyGenerate : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag(Constants.TAG_PLAYER);
-        countTimeIncreseNumberOfMaxEnemys = timeToIncreseNumberOfMaxEnemys;
+        countTimeIncreseNumberOfMaxEnemys = Constants.ENEMY_GENERATE_TIME_TO_INCRESE_NUMBER_OF_MAX_ENEMYS;
         for (int i = 0; i < enemysMaxAlive; i++)
         {
             StartCoroutine(GenerateZombie());
@@ -49,7 +48,8 @@ public class EnemyGenerate : MonoBehaviour
         if (Time.timeSinceLevelLoad > countTimeIncreseNumberOfMaxEnemys)
         {
             enemysMaxAlive++;
-            countTimeIncreseNumberOfMaxEnemys = Time.timeSinceLevelLoad + timeToIncreseNumberOfMaxEnemys;
+            countTimeIncreseNumberOfMaxEnemys = 
+                Time.timeSinceLevelLoad + Constants.ENEMY_GENERATE_TIME_TO_INCRESE_NUMBER_OF_MAX_ENEMYS;
         }
     }
 
@@ -73,8 +73,9 @@ public class EnemyGenerate : MonoBehaviour
     Vector3 GenerateRandomPosition()
     {
         Vector3 position = Random.insideUnitSphere * Constants.ENEMY_GENERATE_RADIO_TO_GENERATE_RANDOM_POSITION;
-        position += transform.position;
-        position.y = transform.position.y;
+        Vector3 myPosition = transform.position;
+        position += myPosition;
+        position.y = myPosition.y;
 
         return position;
     }
