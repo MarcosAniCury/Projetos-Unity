@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>KillZombis(SimpleGame)</title>
+    <title>Unity WebGL Player | KillZombis(SimpleGame)</title>
   </head>
   <body style="text-align: center">
     <canvas id="unity-canvas" width=960 height=540 style="width: 960px; height: 540px; background: #231F20"></canvas>
-    <script src="Build/Jogo.loader.js"></script>
+    <script src="Build/KillZombiesBuild.loader.js"></script>
     <script>
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/Jogo.data.br",
-        frameworkUrl: "Build/Jogo.framework.js.br",
-        codeUrl: "Build/Jogo.wasm.br",
+        dataUrl: "Build/KillZombiesBuild.data",
+        frameworkUrl: "Build/KillZombiesBuild.framework.js",
+        codeUrl: "Build/KillZombiesBuild.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "KillZombis(SimpleGame)",
-        productVersion: "1.0",
+        productVersion: "1.3",
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });

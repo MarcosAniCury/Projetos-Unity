@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IDeadly, ICurable
 {
     //Public vars
-    public LayerMask FlorMask;
     public UIController UIController;
     public AudioClip DamageSound;
+    public GameObject playerGun;
     
     //Private vars
     private Vector3 direction;
@@ -44,14 +44,17 @@ public class PlayerController : MonoBehaviour, IDeadly, ICurable
     void PlayerMovement()
     {
         Ray rayCamera = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane plane = new Plane(Vector3.up, playerGun.transform.position);
 
-        RaycastHit rayCameraImpact;
+        float colliderDistance;
 
-        if (Physics.Raycast(rayCamera,out rayCameraImpact, Constants.RAY_LENGTH, FlorMask)) {
-            Vector3 playerLookPosition = rayCameraImpact.point - transform.position;
-            playerLookPosition.y = transform.position.y;
+        if (plane.Raycast(rayCamera, out colliderDistance))
+        {
+            Vector3 colliderLocal = rayCamera.GetPoint(colliderDistance);
+            colliderLocal.y = 0;
 
-            myMovement.Rotation(playerLookPosition);
+            Vector3 localLook = colliderLocal - transform.position;
+            myMovement.Rotation(localLook);
         }
     }
 
